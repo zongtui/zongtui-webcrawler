@@ -1,0 +1,4 @@
+我是布置的tomcat启动的，访问路径
+
+http://127.0.0.1:8080/webcrawler-web/index.do
+http://127.0.0.1:8080/webcrawler-web/index.do?c=edit
