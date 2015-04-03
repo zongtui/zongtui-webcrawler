@@ -13,17 +13,17 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<modules>
 		<module>webcrawler-core</module>
-		<module>webcrawler-downloader</module>
+		<module>webcrawler-sourceer</module>
 		<module>webcrawler-pipeline</module>
 		<module>webcrawler-plugin</module>
 		<module>webcrawler-scheduler</module>
 		<module>webcrawler-web</module>
-    <module>webcrawler-dao</module>
+    	<module>webcrawler-dao</module>
   </modules>
 </project>
