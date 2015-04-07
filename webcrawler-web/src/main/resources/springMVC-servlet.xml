@@ -18,14 +18,56 @@
 	<!-- 定时任务注解驱动 -->
 	<task:annotation-driven />
 	<!-- 添加注解驱动 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+	   <mvc:argument-resolvers>
+			<bean class="org.springframework.data.web.PageableArgumentResolver"></bean>
+	   </mvc:argument-resolvers> 
+	  
+	  <mvc:message-converters register-defaults="true">
+	      <!-- 将StringHttpMessageCOnverter的默认编码设为UTF-8 -->
+	      <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+        	  <constructor-arg value="UTF-8" />
+     	  </bean>
+      </mvc:message-converters>
 
+    </mvc:annotation-driven>
+    
+	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->		
+	<mvc:default-servlet-handler/>
+	
+	<!-- 此处用于资源 -->
+	<!-- <mvc:resources location="/static/**" mapping="/static/"/> -->
+	
 	<!-- 页面渲染模版 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/template" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<!--beanName视图解析器  -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" >
+	 	<property name="order" value="2" />
+	</bean>
 
+    <!--Multipart支持：用于上传  -->
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="defaultEncoding" value="UTF-8"></property>
+    	<property name="maxUploadSize" value="5242880"></property>
+    	<property name="uploadTempDir" value="upload/temp"></property>
+    </bean>
+	
+
+	<!-- 异常处理  -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">   
+	   <property name="exceptionMappings">   
+	     <props>
+	        <prop key="org.springframework.dao.DataAccessException">error/500</prop>
+	        <prop key="org.springframework.transaction.TransactionException">error/500</prop>
+	        <prop key="java.lang.Throwable">error/500</prop> 
+	  	 </props>   
+	   </property>   
+	</bean>
 
 </beans>
